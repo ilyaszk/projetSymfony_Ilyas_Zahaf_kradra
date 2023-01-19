@@ -1,0 +1,115 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('boutique') }}"><i
+                                class="fas fa-store"></i> {% trans %}Boutique{% endtrans %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('panier') }}"><i class="fas fa-shopping-cart"></i>
+                        {{ nbProduits }} {% trans %}Produit(s){% endtrans %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('contact') }}"><i
+                                class="fas fa-comments"></i> {% trans %}Contact{% endtrans %}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i> {% trans %}Connexion{% endtrans %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item"
+                               href="{{ path('login') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item disabled"
+                               href="{{ url('compte') }}">{% trans %}Mon Compte{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item disabled"
+                               href="{{ url('commandes') }}">{% trans %}Mes Commandes{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item disabled"
+                               href="/mi5/fr/logout">{% trans %}Déconnexion{% endtrans %}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item"
+                    data-toggle="tooltip" title="Ne devra être visible que pour l'Admin" data-placement="right"
+                    data-html="true">
+                <span class="nav-link disabled" href="">
+                    <i class="fas fa-tools"></i> {% trans %}BackOffice{% endtrans %}
+                </span>
+                </li>
+            </ul>
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" id="searchString" placeholder="Chercher Produits..."
+                       aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" id="searchButton">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <ul class="navbar-nav my-0">
+                <li class="nav-item dropdown">
+                    <span class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                        EUR
+                    </span>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02" style="min-width: 5rem;">
+                        <a class="dropdown-item" href="/mi5/fr/changer_monnaie/CAD/home/%7B%22_locale%22:%22fr%22%7D">
+                            CAD
+                        </a>
+                        <a class="dropdown-item" href="/mi5/fr/changer_monnaie/USD/home/%7B%22_locale%22:%22fr%22%7D">
+                            USD
+                        </a>
+                        <a class="dropdown-item" href="/mi5/fr/changer_monnaie/GBP/home/%7B%22_locale%22:%22fr%22%7D">
+                            GBP
+                        </a>
+                        <a class="dropdown-item" href="/mi5/fr/changer_monnaie/PHP/home/%7B%22_locale%22:%22fr%22%7D">
+                            PHP
+                        </a>
+                        <a class="dropdown-item" href="/mi5/fr/changer_monnaie/IDR/home/%7B%22_locale%22:%22fr%22%7D">
+                            IDR
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav my-0">
+                <li class="nav-item dropdown">
+                    <div class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                         style="min-width: 30px;"
+                         aria-expanded="false">
+                        <img src="{{ asset('images/'~app.request.attributes.get('_locale')~'.png') }}" alt="Fr"
+                             width="24" height="24">
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-end ps-1" aria-labelledby="dropdown02"
+                         style="min-width: 35px">
+                        {% for locale in supported_locales|split('|') %}
+                            {% if locale != app.request.attributes.get('_locale') %}
+                                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': locale})) }}">
+                                    <img src="{{ asset('images/'~locale~'.png') }}" alt="{{ locale }}" width="24"
+                                         height="24">
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</nav>

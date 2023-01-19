@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier Controller!{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+    {# tableau avec tous les produits du panier #}
+
+    <div class="d-flex justify-content-around mt-5 mb-5 pt-5 pb-5">
+
+
+        <div class="card" style="width: 70%">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center">Votre panier : {{ nbProduits }} produit(s)</h1>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th scope="col">Nom</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in produits %}
+                            <tr class="text-center align-baseline">
+                                <td>{{ produit.produit.libelle }}</td>
+                                <td><img src="{{ asset(produit.produit.visuel) }}" alt="image du produit" width="100">
+                                </td>
+                                <td><a class="btn btn-danger"
+                                       style="width: 30px; height: 30px;border-radius: 50%; padding: 0; font-size: 1rem"
+                                       href="{{ path('panierRemoveQuantite', {'idProduit': produit.produit.id}) }}">-</a>
+                                    {{ produit.quantite }}
+                                    <a class="btn btn-success"
+                                       style="width: 30px; height: 30px;border-radius: 50%; padding: 0; font-size: 1rem"
+                                       href="{{ path('panierAddQuantite', {'idProduit': produit.produit.id}) }}">+</a>
+                                </td>
+                                <td>{{ produit.produit.prix * produit.quantite }}</td>
+                                <td><a href="{{ path('panierRemoveProduit', {'idProduit': produit.produit.id}) }}"
+                                       class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Supprimer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {#    btn continuer mes achats #}
+        {#    btn passer commande #}
+        {#    Total de la commande #}
+        <div class="card w-25 h-25">
+            <div class=" d-flex flex-column justify-content-center align-items-center">
+                <a href="{{ path('boutique') }}" class="btn btn-primary my-2">Continuer mes achats</a>
+                <a href="{{ path('login') }}" class="btn btn-success my-2">Passer commande</a>
+                <h4 class="text-end text-success ">Total de la commande : {{ total }} €</h4>
+            </div>
+        </div>
+    </div>
+    {% include 'components/footer.html.twig' %}
+
+{% endblock %}

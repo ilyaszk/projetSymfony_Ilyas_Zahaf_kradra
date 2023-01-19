@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+    <main role="main" class="container-fluid" style="margin-top: 4%; width: 90%">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="main-div">
+                    <!-- debut du block body -->
+                    <div class="card col-md-12">
+                        <div class="card-header">
+                            <h1><i class="fas fa-home"></i> Démo Symfony</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="card clickable" onclick="location = '{{ path('boutique') }}';">
+                                <img src="{{ asset('images/epicerie.jpg') }}" class="card-img-top" alt="Logo Boutique Symfony"/>
+                                <div class="card-body">
+                                    <p class="card-text"><i>Ici rien à vendre, c'est juste pour apprendre</i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin du block body -->
+                </div>
+            </div>
+            <div class="col-md-2" style="padding: 0 10px 0 10px;">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4><i class="fas fa-star"></i> Top Ventes <i class="fas fa-star"></i></h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <a href="/mi5/fr/boutique/rayon/3">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/nutella.jpg" style="height: 40px;"/>
+                                    <p>Nutella<br><i>130 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/1">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/peche.jpg" style="height: 40px;"/>
+                                    <p>Pêche<br><i>39 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/3">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/oreo.jpg" style="height: 40px;"/>
+                                    <p>Oreo<br><i>36 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/2">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/romanesco.jpg" style="height: 40px;"/>
+                                    <p>Chou Romanesco<br><i>25 Ventes</i></p>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- JS : JQuery, Bootstrap -->
+    <script src="/mi5/js/jquery-3/jquery.slim.min.js" ></script>
+    <script src="/mi5/js/bootstrap-4/bootstrap.bundle.min.js" ></script>
+    <script>
+        $(function () {
+            // Activation tooltip bootstrap sur la page
+            $('[data-toggle="tooltip"]').tooltip();
+            // Comportement du bouton de recherche
+            $("#searchButton").click(
+                function () {
+                    var searchString = $('#searchString').val().trim();
+                    location = ('/mi5/fr/boutique/chercher/' + searchString);
+                    return false;
+                });
+        });
+    </script>        <!-- debut du block js -->
+    <!-- fin du block js -->
+    </body>
+    </html>
+    {% include 'components/footer.html.twig' %}
+
+{% endblock %}

@@ -1,7 +1,94 @@
-controllers:
-    resource: ../src/Controller/
-    type: annotation
+# config/routes.yaml
+home:
+  path: /{_locale}
+  controller: App\Controller\DefaultController::home
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+contact:
+  path: /{_locale}/contact
+  controller: App\Controller\ContactController::contact
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+panier:
+  path: /{_locale}/panier
+  controller: App\Controller\PanierController::panier
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
 
-kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+
+boutique:
+  path: /{_locale}/boutique
+  controller: App\Controller\BoutiqueController::boutique
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+compte:
+  path: /{_locale}/compte
+  controller: App\Controller\CompteController::compte
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+commandes:
+  path: /{_locale}/commandes
+  controller: App\Controller\CommandeController::commandes
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+produits:
+  path: /{_locale}/produits/{idCategorie}
+  controller: App\Controller\BoutiqueController::produits
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+ajouterProduit:
+  path: /{_locale}/ajouterProduit/{idProduit}
+  controller: App\Controller\PanierController::ajouterProduit
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+panierAddQuantite:
+  path: /{_locale}/produitQuantite/{idProduit}
+  controller: App\Controller\PanierController::panierAddQuantite
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+panierRemoveQuantite:
+  path: /{_locale}/produitRemoveQuantite/{idProduit}
+  controller: App\Controller\PanierController::panierRemoveQuantite
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+panierRemoveProduit:
+    path: /{_locale}/produitRemove/{idProduit}
+    controller: App\Controller\PanierController::panierRemoveProduit
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: fr
+login:
+  path: /{_locale}/login
+  controller: App\Controller\LoginController::login
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr

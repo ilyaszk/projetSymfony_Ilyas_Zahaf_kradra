@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Controller!{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+    <main role="main" class="container-fluid mt-5 pt-5">
+        <div class="row">
+
+            {#            reproduit la div du dessus en bootstrap 5 #}
+            <div class="col-md-6 offset-md-2">
+                <div class="main-div">
+                    <!-- debut du block body -->
+                    <div class="card col-md-12">
+                        <div class="card-header">
+                            <h1><i class="fas fa-comments"></i> Contact</h1>
+                        </div>
+                        <div class="card-body text-center" style="width: 50%; margin: auto;">
+                            <div class="card stretched-link"
+                                 onclick="window.open('https://www-info.iut2.univ-grenoble-alpes.fr/licence-pro-mi/')">
+                                <img src="{{ asset('images/iut2_info.png') }}" class="card-img-top" alt="iut2_info">
+                                <div class="card-body">
+                                    <h1 class="card-title
+                                    "><i class="fas fa-code"></i> Licence Pro MI AW</h1>
+                                    <h2 class="card-title
+                                    "><i class="fab fa-symfony"></i> Module MI5</h2>
+                                    <p><i class="far fa-copyright"></i> Ph. Martin, 2019/20</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin du block body -->
+                </div>
+            </div>
+
+
+            <div class="col-md-2" style="padding: 10px;">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4><i class="fas fa-star"></i> Top Ventes <i class="fas fa-star"></i></h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <a href="/mi5/fr/boutique/rayon/3">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/nutella.jpg" style="height: 40px;">
+                                    <p>Nutella<br><i>130 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/1">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/peche.jpg" style="height: 40px;">
+                                    <p>Pêche<br><i>40 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/3">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/oreo.jpg" style="height: 40px;">
+                                    <p>Oreo<br><i>37 Ventes</i></p>
+                                </li>
+                            </a>
+                            <a href="/mi5/fr/boutique/rayon/2">
+                                <li class="list-group-item text-center clickable">
+                                    <img src="/mi5/images/produits/romanesco.jpg" style="height: 40px;">
+                                    <p>Chou Romanesco<br><i>25 Ventes</i></p>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% include 'components/footer.html.twig' %}
+
+{% endblock %}
