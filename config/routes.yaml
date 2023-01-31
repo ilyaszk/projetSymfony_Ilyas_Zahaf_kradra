@@ -40,7 +40,7 @@ compte:
 
 commandes:
   path: /{_locale}/commandes
-  controller: App\Controller\CommandeController::commandes
+  controller: App\Controller\CommandesController::commandes
   requirements:
     _locale: '%app.supported_locales%'
   defaults:
@@ -88,6 +88,38 @@ panierRemoveProduit:
 login:
   path: /{_locale}/login
   controller: App\Controller\LoginController::login
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+nbProduits:
+  path: /{_locale}/nbProduits
+  controller: App\Controller\DefaultController::nbProduits
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+userAccueil:
+  path: /{_locale}/user_accueil
+  controller: App\Controller\UserController::index
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+userInscription:
+  path: /{_locale}/user_inscription
+  controller: App\Controller\UserController::new
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+passerCommande:
+  path: /{_locale}/passerCommande
+  controller: App\Controller\PanierController::passerCommande
   requirements:
     _locale: '%app.supported_locales%'
   defaults:

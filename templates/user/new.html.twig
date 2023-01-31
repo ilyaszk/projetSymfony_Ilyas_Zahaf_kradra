@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+    <h1 class="mt-5 pt-5">Create new User</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('userAccueil') }}">back to list</a>
+{% endblock %}

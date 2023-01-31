@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+
+    <h1 class="mt-5 pt-5" >Mon compte</h1>
+    <div class="card h-50" style="margin: 0 35% 0 35%">
+        <img class="card-img-top" style="height: 150px; width: 150px; margin: 0 auto; margin-top: 20px"
+         src="{{ asset('images/userImage.png') }}" alt="Card image cap">
+        <div class="card-body text-center m-2" style="border: 3px solid #7faad9">
+            <h4 class="card-title">Nom</h4>
+            <h6 class="card-text">{{ user.nom }}</h6>
+            <h4 class="card-title">Prénom</h4>
+            <h6 class="card-text">{{ user.prenom }}</h6>
+            <h4 class="card-title">Email</h4>
+            <h6 class="card-text">{{ user.email }}</h6>
+        </div>
+    </div>
+    {% include 'components/footer.html.twig' %}
+
+{% endblock %}

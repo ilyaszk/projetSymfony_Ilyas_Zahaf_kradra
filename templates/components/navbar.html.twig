@@ -15,7 +15,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('panier') }}"><i class="fas fa-shopping-cart"></i>
-                        {{ nbProduits }} {% trans %}Produit(s){% endtrans %}</a>
+                        {{ render(path('nbProduits')) }} {% trans %}Produit(s){% endtrans %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('contact') }}"><i
@@ -29,14 +29,14 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item"
-                               href="{{ path('login') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
+                               href="{{ path('userInscription') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item disabled"
-                               href="{{ url('compte') }}">{% trans %}Mon Compte{% endtrans %}</a>
+                            <a class="dropdown-item "
+                               href="{{ url('userAccueil') }}">{% trans %}Mon Compte{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item disabled"
+                            <a class="dropdown-item"
                                href="{{ url('commandes') }}">{% trans %}Mes Commandes{% endtrans %}</a>
                         </li>
                         <li>

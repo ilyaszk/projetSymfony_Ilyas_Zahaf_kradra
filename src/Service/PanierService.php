@@ -2,8 +2,12 @@
 
 namespace App\Service;
 
-use PhpParser\Node\Expr\Array_;
-use Symfony\Component\HttpFoundation\SessionInterface;
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
+use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class PanierService
@@ -15,8 +19,9 @@ class PanierService
     // donc $this->panier[$i] = quantite du produit dont l'id = $i
     // constructeur du service
 
-    public function __construct(RequestStack $requestStack, BoutiqueService $boutique){
-        $this->panier = Array();
+    public function __construct(RequestStack $requestStack, ProduitRepository $boutique)
+    {
+        $this->panier = array();
         // Récupération des services session et BoutiqueService
         $this->boutique = $boutique;
         $this->session = $requestStack->getSession();
@@ -50,7 +55,8 @@ class PanierService
         if (sizeof($this->panier) > 0) {
             foreach ($this->panier as $idProduit => $quantite) {
                 $produit = $this->boutique->findProduitById($idProduit);
-                $total += $produit->prix * $quantite;
+                $total += $produit->getPrix() * $quantite;
+
             }
         }
         return $total;
@@ -108,6 +114,41 @@ class PanierService
     function vider()
     { // à compléter
         $this->panier = [];
+        $this->session->set(self::PANIER_SESSION, $this->panier);
     }
 
+    //Ajouter une nouvelle méthode panierToCommande qui reçoit en paramètre une entité de type Usager et qui
+    //crée, pour cet usager, une commande (et ses lignes de commande) à partir du contenu du panier (s’il n’est pas
+    //vide).
+    //o Le contenu du panier devra être supprimé à l’issue de ce traitement.
+    //o Cette méthode renverra en résultat l’entité Commande qui aura été créée.
+
+    public function panierToCommande($user, EntityManagerInterface $em) : void{
+
+        $commande = new Commande();
+        $total = 0;
+        $nbProduits = 0;
+        $commande->setUsager($user);
+        $commande->setDateCommande(new \DateTime());
+        $commande->setStatut("En cours");
+        $commande->setTotal(0);
+        $commande->setNbProduit(0);
+
+        foreach ($this->panier as $idProduit => $quantite) {
+            $produit = $this->boutique->findProduitById($idProduit);
+            $ligneCommande = new LigneCommande();
+            $ligneCommande->setProduit($produit);
+            $ligneCommande->setQuantite($quantite);
+            $ligneCommande->setPrix($produit->getPrix()*$quantite);
+            $ligneCommande->setCommande($commande);
+            $total += $ligneCommande->getPrix();
+            $nbProduits += $quantite;
+            $commande->addLigneCommande($ligneCommande);
+        }
+        $commande->setTotal($total);
+        $commande->setNbProduit($nbProduits);
+        $em->persist($commande);
+        $em->flush();
+        $this->vider();
+    }
 }

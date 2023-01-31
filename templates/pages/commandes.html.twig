@@ -4,6 +4,62 @@
 
 {% block body %}
     {% include 'components/navbar.html.twig' %}
+    {#    un tableau par commande avec les ligne des commandes correspondantes #}
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Commandes</h1>
+            </div>
+        </div>
+        {% for commande in commandes %}
+            <div class="card row border border-dark m-4" style="padding: 10px; border-radius: 10px">
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Nb produit(s)</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <th scope="row">{{ commande.id }}</th>
+                            <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+                            <td>{{ commande.statut }}</td>
+                            <td>{{ commande.nbProduit }}</td>
+                            <td>{{ commande.total }} €</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table align-content-end text-white w-75 " style="margin:auto;background: #a8a6c2">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Visuel</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix unitaire</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ligne in commande.ligneCommandes %}
+                            <tr>
+                                <td>{{ ligne.produit.libelle }}</td>
+                                <td><img src="{{ asset(ligne.produit.visuel) }}" alt="visuel produit"
+                                         style="width: 100px"></td>
+                                <td>{{ ligne.quantite }}</td>
+                                <td>{{ ligne.prix }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     {% include 'components/footer.html.twig' %}
 
 {% endblock %}

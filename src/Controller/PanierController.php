@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Service\PanierService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +15,10 @@ class PanierController extends AbstractController
     public function panier(PanierService $panierService): Response
     {
         $produits = $panierService->getContenu();
-        $nbProduits = $panierService->getNbProduits();
         $total = $panierService->getTotal();
         return $this->render('pages/panier.html.twig', [
             'controller_name' => 'PanierController',
             'produits' => $produits,
-            'nbProduits' => $nbProduits,
             'total' => $total
         ]);
     }
@@ -48,6 +48,13 @@ class PanierController extends AbstractController
     public function panierRemoveProduit(PanierService $panierService, int $idProduit): Response
     {
         $panierService->supprimerProduit($idProduit);
+        return $this->redirectToRoute('panier');
+    }
+
+    #[Route('/panier/passerCommande', name: 'app_panier_passerCommande')]
+    public function passerCommande(PanierService $panierService, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+        $panierService->panierToCommande($userRepository->getUser(), $entityManager);
         return $this->redirectToRoute('panier');
     }
 }

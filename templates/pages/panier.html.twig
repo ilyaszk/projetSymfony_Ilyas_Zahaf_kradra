@@ -12,7 +12,7 @@
         <div class="card" style="width: 70%">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center">Votre panier : {{ nbProduits }} produit(s)</h1>
+                    <h1 class="text-center">Votre panier : {{ render(path('nbProduits')) }}  produit(s)</h1>
                     <table class="table table-striped">
                         <thead class="thead-dark">
                         <tr class="text-center">
@@ -53,7 +53,7 @@
         <div class="card w-25 h-25">
             <div class=" d-flex flex-column justify-content-center align-items-center">
                 <a href="{{ path('boutique') }}" class="btn btn-primary my-2">Continuer mes achats</a>
-                <a href="{{ path('login') }}" class="btn btn-success my-2">Passer commande</a>
+                <a href="{{ path('passerCommande') }}" class="btn btn-success my-2">Passer commande</a>
                 <h4 class="text-end text-success ">Total de la commande : {{ total }} €</h4>
             </div>
         </div>
