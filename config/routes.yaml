@@ -85,14 +85,6 @@ panierRemoveProduit:
         _locale: '%app.supported_locales%'
     defaults:
         _locale: fr
-login:
-  path: /{_locale}/login
-  controller: App\Controller\LoginController::login
-  requirements:
-    _locale: '%app.supported_locales%'
-  defaults:
-    _locale: fr
-
 nbProduits:
   path: /{_locale}/nbProduits
   controller: App\Controller\DefaultController::nbProduits
@@ -120,6 +112,14 @@ userInscription:
 passerCommande:
   path: /{_locale}/passerCommande
   controller: App\Controller\PanierController::passerCommande
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+app_login:
+  path: /{_locale}/app_login
+  controller: App\Controller\SecuriteController::login
   requirements:
     _locale: '%app.supported_locales%'
   defaults:
