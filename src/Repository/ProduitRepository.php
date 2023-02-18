@@ -48,8 +48,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->setParameter('val', $id)
             ->orderBy('p.libelle', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     //findProduitById
@@ -60,8 +59,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('p.id = :val')
             ->setParameter('val', $id)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 
 //    /**
@@ -88,4 +86,5 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

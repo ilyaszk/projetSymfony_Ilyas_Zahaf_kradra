@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique Controller!{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap justify-content-center m-auto">
+            <div class="card">
+                {{ form_start(formCate) }}
+                {{ form_widget(formCate) }}
+                {{ form_end(formCate) }}
+            </div>
+    </div>
+{% endblock %}
+

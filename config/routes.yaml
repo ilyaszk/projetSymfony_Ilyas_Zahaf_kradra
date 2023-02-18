@@ -79,12 +79,12 @@ panierRemoveQuantite:
     _locale: fr
 
 panierRemoveProduit:
-    path: /{_locale}/produitRemove/{idProduit}
-    controller: App\Controller\PanierController::panierRemoveProduit
-    requirements:
-        _locale: '%app.supported_locales%'
-    defaults:
-        _locale: fr
+  path: /{_locale}/produitRemove/{idProduit}
+  controller: App\Controller\PanierController::panierRemoveProduit
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
 nbProduits:
   path: /{_locale}/nbProduits
   controller: App\Controller\DefaultController::nbProduits
@@ -101,14 +101,6 @@ userAccueil:
   defaults:
     _locale: fr
 
-userInscription:
-  path: /{_locale}/user_inscription
-  controller: App\Controller\UserController::new
-  requirements:
-    _locale: '%app.supported_locales%'
-  defaults:
-    _locale: fr
-
 passerCommande:
   path: /{_locale}/passerCommande
   controller: App\Controller\PanierController::passerCommande
@@ -117,9 +109,71 @@ passerCommande:
   defaults:
     _locale: fr
 
-app_login:
-  path: /{_locale}/app_login
+login:
+  path: /{_locale}/login
   controller: App\Controller\SecuriteController::login
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+logout:
+  path: /{_locale}/logout
+  controller: App\Controller\SecuriteController::logout
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+register:
+  path: /{_locale}/register
+  controller: App\Controller\SecuriteController::register
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+backoffice:
+  path: /{_locale}/backoffice
+  controller: App\Controller\BackofficeController::index
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+createCategory:
+  path: /{_locale}/createCategory
+  controller: App\Controller\BackofficeController::createCategory
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+createProduct:
+    path: /{_locale}/createProduct
+    controller: App\Controller\BackofficeController::createProduct
+    requirements:
+        _locale: '%app.supported_locales%'
+    defaults:
+        _locale: fr
+
+gererCommandes:
+  path: /{_locale}/gererCommandes
+  controller: App\Controller\BackofficeController::gererCommandes
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+cloreCommande:
+  path: /{_locale}/cloreCommande/{id}
+  controller: App\Controller\CommandesController::cloreCommande
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr
+
+supprimerCommande:
+  path: /{_locale}/supprimerCommande/{id}
+  controller: App\Controller\CommandesController::supprimerCommande
   requirements:
     _locale: '%app.supported_locales%'
   defaults:

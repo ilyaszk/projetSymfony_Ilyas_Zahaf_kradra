@@ -2,22 +2,26 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
+use App\Entity\Produit;
 use App\Entity\User;
 use PharIo\Manifest\Email;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InscriptionType extends AbstractType
+class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
+            ->add('libelle', TextType::class, [
                 'required' => true,
                 'label_attr' => [
                     'class' => 'form-label'
@@ -26,7 +30,7 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('password', PasswordType::class, [
+            ->add('visuel', TextType::class, [
                 'required' => true,
                 'label_attr' => [
                     'class' => 'form-label'
@@ -35,7 +39,7 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('nom', TextType::class, [
+            ->add('texte', TextType::class, [
                 'required' => true,
                 'label_attr' => [
                     'class' => 'form-label'
@@ -44,7 +48,7 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('prenom', TextType::class, [
+            ->add('prix', NumberType::class, [
                 'required' => true,
                 'label_attr' => [
                     'class' => 'form-label'
@@ -53,20 +57,29 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('Inscription', SubmitType::class, [
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
+                'label' => 'Categorie',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('Ajouter', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary my-3 w-100 text-uppercase font-weight-bold'
                 ]
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Produit::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id' => 'inscription_item',
+            'csrf_token_id' => 'product_item',
         ]);
     }
 

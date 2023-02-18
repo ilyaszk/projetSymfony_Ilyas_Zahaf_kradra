@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container">
+        <a href="{{ path('backoffice') }}" class="btn btn-primary">Retour</a>
         {% for commande in commandes %}
             <div class="card row border border-dark m-4" style="padding: 10px; border-radius: 10px">
                 <div class="col-12">
@@ -14,6 +15,7 @@
                             <th scope="col">Statut</th>
                             <th scope="col">Nb produit(s)</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,28 +25,10 @@
                             <td>{{ commande.statut }}</td>
                             <td>{{ commande.nbProduit }}</td>
                             <td>{{ commande.total }} €</td>
+                            <td>
+                                <a href="{{ path('cloreCommande', {'id': commande.id}) }}" class="btn btn-primary {{ commande.statut == 'Terminée' ? 'disabled' : '' }}">Cloturer</a>
+                                <a href="{{ path('supprimerCommande', {'id': commande.id}) }}" class="btn btn-danger">Supprimer</a>
                         </tr>
-                        </tbody>
-                    </table>
-                    <table class="table align-content-end text-white w-75 " style="margin:auto;background: #a8a6c2">
-                        <thead>
-                        <tr>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Visuel</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Prix unitaire</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for ligne in commande.ligneCommandes %}
-                            <tr>
-                                <td>{{ ligne.produit.libelle }}</td>
-                                <td><img src="{{ asset(ligne.produit.visuel) }}" alt="visuel produit"
-                                         style="width: 100px"></td>
-                                <td>{{ ligne.quantite }}</td>
-                                <td>{{ ligne.prix }}</td>
-                            </tr>
-                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

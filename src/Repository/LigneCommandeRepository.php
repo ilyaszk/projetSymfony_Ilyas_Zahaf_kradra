@@ -63,4 +63,32 @@ class LigneCommandeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findTopProduits(): array
+    {
+        // #[ORM\Id]
+        //    #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
+        //    private ?Produit $produit = null;
+        //
+        //    #[ORM\Id]
+        //    #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
+        //    private ?Commande $commande = null;
+        //
+        //    #[ORM\Column]
+        //    private ?int $quantite = null;
+        //
+        //    #[ORM\Column]
+        //    private ?float $prix = null;
+//        $query = 'Select p.id, p.libelle, p.prix, sum(l.quantite) as quantite from produit p, ligne_commande l where p.id = l.produit_id group by p.id order by quantite desc limit 5';
+        //en dql
+
+        return $this->createQueryBuilder('l')
+            ->select('p.id, p.libelle, p.prix, p.visuel, c.id as categorie, sum(l.quantite) as quantite')
+            ->join('l.produit', 'p')
+            ->join('p.categorie', 'c')
+            ->groupBy('p.id')
+            ->orderBy('quantite', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+        }
 }

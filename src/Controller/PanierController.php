@@ -52,9 +52,9 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier/passerCommande', name: 'app_panier_passerCommande')]
-    public function passerCommande(PanierService $panierService, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function passerCommande(PanierService $panierService, EntityManagerInterface $entityManager): Response
     {
-        $panierService->panierToCommande($userRepository->getUser(), $entityManager);
+        $panierService->panierToCommande($this->getUser(), $entityManager);
         return $this->redirectToRoute('panier');
     }
 }

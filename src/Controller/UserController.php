@@ -20,9 +20,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     #[Route('/userAccueil', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
-        $user = $userRepository->getUser();
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+        $user = $this->getUser();
+
+
         return $this->render('user/index.html.twig', [
             'user' => $user,
         ]);
@@ -32,7 +37,10 @@ class UserController extends AbstractController
     public function new(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
     {
         $user = new User();
-        $formInscr = $this->createForm(InscriptionType::class, $user);
+        $formInscr = $this->createForm(InscriptionType::class, $user,[
+            'action' => $this->generateUrl('userInscription'),
+            'method' => 'POST'
+        ]);
         $formInscr->handleRequest($request);
         dump($request);
         if ($formInscr->isSubmitted() && $formInscr->isValid()) {
@@ -45,7 +53,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('userAccueil');
         }
 
-        return $this->render('user/new.html.twig', [
+        return $this->render('security/login.html.twig', [
             'formInscr' => $formInscr->createView(),
         ]);
     }

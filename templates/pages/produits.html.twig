@@ -3,29 +3,23 @@
 {% block title %}Boutique Controller!{% endblock %}
 
 {% block body %}
-    {% include 'components/navbar.html.twig' %}
-    {#        // Ici  des cards avec les differents produits en fonction de la categorie #}
-{#    btn retour#}
-    <div class="container mt-5 mb-5 pt-5 pb-5">
-        <a href="{{ path('boutique') }}" class="btn btn-primary mb-4">Retour</a>
-        <div class="d-flex justify-content-around">
+    <div>
+        <a href="{{ path('boutique') }}" class="btn btn-primary mt-2">Retour</a>
+        <div class="d-flex flex-wrap justify-content-center m-auto">
             {% for produit in produits %}
-                <div class="col-auto">
-                    <div class="card" style="width: 18rem; height: 28rem;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ produit.libelle }}</h5>
-                            <img class="card-img" src="{{ asset(produit.visuel) }}">
-                            <p class="card-text">{{ produit.prix }} €</p>
-                            <p class="card-text" style="height: 30px">{{ produit.texte }}</p>
-                            <a class="btn btn-primary" href="{{ path('ajouterProduit', {'idProduit': produit.id}) }}"><i class="fas fa-shopping-cart me-1"></i>Ajouter au panier</a>
-                        </div>
+                <div class="card m-2" style="width: 16rem; height: 28rem;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ produit.libelle }}</h5>
+                        <img class="card-img" src="{{ asset(produit.visuel) }}">
+                        <p class="card-text">{{ produit.prix }} €</p>
+                        <p class="card-text" style="height: 30px">{{ produit.texte }}</p>
+                        <a class="btn btn-primary" href="{{ path('ajouterProduit', {'idProduit': produit.id}) }}"><i
+                                    class="fas fa-shopping-cart me-1"></i>Ajouter au panier</a>
                     </div>
                 </div>
             {% endfor %}
         </div>
+
     </div>
-
-    {% include 'components/footer.html.twig' %}
-
 {% endblock %}
 

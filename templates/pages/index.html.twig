@@ -3,8 +3,7 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    {% include 'components/navbar.html.twig' %}
-    <main role="main" class="container-fluid" style="margin-top: 4%; width: 90%">
+    <main role="main" class="container-fluid" style="width: 90%">
         <div class="row">
             <div class="col-md-10">
                 <div class="main-div">
@@ -22,49 +21,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- fin du block body -->
-                </div>
-            </div>
-            <div class="col-md-2" style="padding: 0 10px 0 10px;">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h4><i class="fas fa-star"></i> Top Ventes <i class="fas fa-star"></i></h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <a href="/mi5/fr/boutique/rayon/3">
-                                <li class="list-group-item text-center clickable">
-                                    <img src="/mi5/images/produits/nutella.jpg" style="height: 40px;"/>
-                                    <p>Nutella<br><i>130 Ventes</i></p>
-                                </li>
-                            </a>
-                            <a href="/mi5/fr/boutique/rayon/1">
-                                <li class="list-group-item text-center clickable">
-                                    <img src="/mi5/images/produits/peche.jpg" style="height: 40px;"/>
-                                    <p>Pêche<br><i>39 Ventes</i></p>
-                                </li>
-                            </a>
-                            <a href="/mi5/fr/boutique/rayon/3">
-                                <li class="list-group-item text-center clickable">
-                                    <img src="/mi5/images/produits/oreo.jpg" style="height: 40px;"/>
-                                    <p>Oreo<br><i>36 Ventes</i></p>
-                                </li>
-                            </a>
-                            <a href="/mi5/fr/boutique/rayon/2">
-                                <li class="list-group-item text-center clickable">
-                                    <img src="/mi5/images/produits/romanesco.jpg" style="height: 40px;"/>
-                                    <p>Chou Romanesco<br><i>25 Ventes</i></p>
-                                </li>
-                            </a>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </main>
     <!-- JS : JQuery, Bootstrap -->
-    <script src="/mi5/js/jquery-3/jquery.slim.min.js" ></script>
-    <script src="/mi5/js/bootstrap-4/bootstrap.bundle.min.js" ></script>
     <script>
         $(function () {
             // Activation tooltip bootstrap sur la page
@@ -81,6 +42,5 @@
     <!-- fin du block js -->
     </body>
     </html>
-    {% include 'components/footer.html.twig' %}
 
 {% endblock %}

@@ -3,21 +3,61 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    {% include 'components/navbar.html.twig' %}
+    {#
+    2 cards
+    1er card : image + nom + prenom
+    2eme card : input nom + input prenom + input email + bouton modifier
+    #}
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="card w-50 text-center h-75">
+            <img class="card-img-top img-fluid w-50 mx-auto mt-5"
+                 src="{{ asset('images/userImage.png') }}" alt="Card image cap">
+            <h4 class="card-text">{{ user.nom }} {{ user.prenom }}</h4>
+        </div>
 
-    <h1 class="mt-5 pt-5" >Mon compte</h1>
-    <div class="card h-50" style="margin: 0 35% 0 35%">
-        <img class="card-img-top" style="height: 150px; width: 150px; margin: 0 auto; margin-top: 20px"
-         src="{{ asset('images/userImage.png') }}" alt="Card image cap">
-        <div class="card-body text-center m-2" style="border: 3px solid #7faad9">
-            <h4 class="card-title">Nom</h4>
-            <h6 class="card-text">{{ user.nom }}</h6>
-            <h4 class="card-title">Prénom</h4>
-            <h6 class="card-text">{{ user.prenom }}</h6>
-            <h4 class="card-title">Email</h4>
-            <h6 class="card-text">{{ user.email }}</h6>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <span class="input-group m-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Nom</span>
+                        </div>
+                        <input type="text" class="form-control me-4" disabled value="{{ user.nom }}">
+                    </span>
+
+                    <span class="input-group m-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Prenom</span>
+                        </div>
+                        <input type="text" class="form-control me-4" disabled value="{{ user.prenom }}">
+                    </span>
+
+                    <span class="input-group m-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="text" class="form-control me-4" disabled value="{{ user.email }}">
+                    </span>
+
+                    <span class="input-group m-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Password</span>
+                        </div>
+                        <input type="text" class="form-control me-4" disabled value="">
+                    </span>
+
+                    <span class="input-group m-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Confirmer le mot de passe</span>
+                        </div>
+                        <input type="text" class="form-control me-4" disabled value="">
+                    </span>
+
+                    <button type="submit" class="btn btn-primary disabled w-100">Modifier</button>
+
+
+                </form>
+            </div>
         </div>
     </div>
-    {% include 'components/footer.html.twig' %}
-
 {% endblock %}

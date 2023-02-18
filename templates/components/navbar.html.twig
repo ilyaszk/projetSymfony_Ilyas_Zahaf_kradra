@@ -27,30 +27,32 @@
                         <i class="fas fa-user"></i> {% trans %}Connexion{% endtrans %}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item"
-                               href="{{ path('userInscription') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
-                        </li>
+                        {% if app.user == '' %}
+                            <li>
+                                <a class="dropdown-item"
+                                   href="{{ path('login') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
+                            </li>
+                        {% endif %}
                         <li>
                             <a class="dropdown-item "
                                href="{{ url('userAccueil') }}">{% trans %}Mon Compte{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item  {{ app.user ? '' : 'disabled' }}"
                                href="{{ url('commandes') }}">{% trans %}Mes Commandes{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item disabled"
-                               href="/mi5/fr/logout">{% trans %}Déconnexion{% endtrans %}</a>
+                            <a class="dropdown-item {{ app.user ? '' : 'disabled' }}"
+                               href="{{ url('logout') }}">{% trans %}Déconnexion{% endtrans %}</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item"
-                    data-toggle="tooltip" title="Ne devra être visible que pour l'Admin" data-placement="right"
+                    data-toggle="tooltip" data-placement="right"
                     data-html="true">
-                <span class="nav-link disabled" href="">
-                    <i class="fas fa-tools"></i> {% trans %}BackOffice{% endtrans %}
-                </span>
+                    <span>
+                        <a class="nav-link {{ app.user ? '' : 'disabled' }}" href="{{ path('backoffice') }}"><i class="fas fa-tools"></i> {% trans %}BackOffice{% endtrans %}</a>
+                    </span>
                 </li>
             </ul>
 
@@ -108,8 +110,18 @@
                     </div>
                 </li>
             </ul>
-
-
+            {% if app.user != '' %}
+                <ul>
+                    <li>
+                    <span class="d-flex align-items-center pt-3">
+                        <i class="fas fa-user" style="color: #d9e6ea; font-size: 0.6rem;">
+                            <span class="badge rounded-pill bg-danger"
+                                  style="font-size: 0.6rem;">{{ app.user.nom }} {{ app.user.prenom }}</span>
+                        </i>
+                </span>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
     </div>
 </nav>
