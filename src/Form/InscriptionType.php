@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use PharIo\Manifest\Email;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -53,6 +54,11 @@ class InscriptionType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('captcha', CaptchaType::class, array(
+                'width' => 200,
+                'height' => 50,
+                'length' => 6,
+            ))
             ->add('Inscription', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary my-3 w-100 text-uppercase font-weight-bold'

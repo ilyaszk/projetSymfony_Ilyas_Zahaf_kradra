@@ -32,28 +32,5 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
-
-    #[Route('/userInscription', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
-    {
-        $user = new User();
-        $formInscr = $this->createForm(InscriptionType::class, $user,[
-            'action' => $this->generateUrl('userInscription'),
-            'method' => 'POST'
-        ]);
-        $formInscr->handleRequest($request);
-        if ($formInscr->isSubmitted() && $formInscr->isValid()) {
-            $user->setRoles(['ROLE_USER']);
-            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('userAccueil');
-        }
-
-        return $this->render('security/login.html.twig', [
-            'formInscr' => $formInscr->createView(),
-        ]);
-    }
 }
 
