@@ -35,7 +35,6 @@ class DefaultController extends AbstractController
     public function topProduits(LigneCommandeRepository $ligneCommandeRepository): Response
     {
         $topProduits = $ligneCommandeRepository->findTopProduits();
-        dump($topProduits);
         return $this->render('components/sideTopProduit.html.twig', [
             'controller_name' => 'DefaultController',
             'topProduits' => $topProduits

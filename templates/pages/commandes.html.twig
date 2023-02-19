@@ -4,6 +4,11 @@
 
 {% block body %}
     <div class="container">
+        {% if commandes is empty %}
+            <div class="alert alert-danger" role="alert">
+                Vous n'avez pas encore passé de commande
+            </div>
+        {% endif %}
         {% for commande in commandes %}
             <div class="card row border border-dark m-4" style="padding: 10px; border-radius: 10px">
                 <div class="col-12">

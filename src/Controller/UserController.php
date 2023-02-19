@@ -42,9 +42,7 @@ class UserController extends AbstractController
             'method' => 'POST'
         ]);
         $formInscr->handleRequest($request);
-        dump($request);
         if ($formInscr->isSubmitted() && $formInscr->isValid()) {
-            dump($user);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $em->persist($user);

@@ -178,3 +178,11 @@ supprimerCommande:
     _locale: '%app.supported_locales%'
   defaults:
     _locale: fr
+
+rechercheProduit:
+  path: /{_locale}/rechercheProduit
+  controller: App\Controller\BoutiqueController::rechercheProduit
+  requirements:
+    _locale: '%app.supported_locales%'
+  defaults:
+    _locale: fr

@@ -27,7 +27,7 @@
                         <i class="fas fa-user"></i> {% trans %}Connexion{% endtrans %}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% if app.user == '' %}
+                        {% if is_granted('ROLE_USER') == '' %}
                             <li>
                                 <a class="dropdown-item"
                                    href="{{ path('login') }}">{% trans %}Connexion/Inscription{% endtrans %}</a>
@@ -38,26 +38,29 @@
                                href="{{ url('userAccueil') }}">{% trans %}Mon Compte{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item  {{ app.user ? '' : 'disabled' }}"
+                            <a class="dropdown-item  {{ is_granted('ROLE_CLIENT') ? '' : 'disabled' }}"
                                href="{{ url('commandes') }}">{% trans %}Mes Commandes{% endtrans %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item {{ app.user ? '' : 'disabled' }}"
+                            <a class="dropdown-item {{ is_granted('ROLE_CLIENT') ? '' : 'disabled' }}"
                                href="{{ url('logout') }}">{% trans %}Déconnexion{% endtrans %}</a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"
-                    data-toggle="tooltip" data-placement="right"
-                    data-html="true">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item"
+                        data-toggle="tooltip" data-placement="right"
+                        data-html="true">
                     <span>
-                        <a class="nav-link {{ app.user ? '' : 'disabled' }}" href="{{ path('backoffice') }}"><i class="fas fa-tools"></i> {% trans %}BackOffice{% endtrans %}</a>
+                        <a class="nav-link" href="{{ path('backoffice') }}"><i
+                                    class="fas fa-tools"></i> {% trans %}BackOffice{% endtrans %}</a>
                     </span>
-                </li>
+                    </li>
+                {% endif %}
             </ul>
 
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" id="searchString" placeholder="Chercher Produits..."
+            <form class="d-flex" action="{{ path('rechercheProduit') }}" method="get">
+                <input class="form-control me-2" type="search" name="searchString" placeholder="Chercher Produits..."
                        aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" id="searchButton">
                     <i class="fas fa-search"></i>

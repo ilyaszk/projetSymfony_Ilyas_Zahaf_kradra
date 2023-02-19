@@ -51,7 +51,6 @@ class SecuriteController extends AbstractController
             'method' => 'POST'
         ]);
         $formInscr->handleRequest($request);
-        dump($request);
         if ($formInscr->isSubmitted() && $formInscr->isValid()) {
 
             $user->setRoles(['ROLE_CLIENT']);
