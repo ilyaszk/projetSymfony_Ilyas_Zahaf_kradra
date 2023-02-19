@@ -4,11 +4,12 @@
 
 {% block body %}
     <div class="d-flex flex-wrap justify-content-center m-auto">
-            <div class="card">
-                {{ form_start(formCate) }}
-                {{ form_widget(formCate) }}
-                {{ form_end(formCate) }}
-            </div>
+        <div class="card" style="width: 35rem; padding: 10px;">
+            <h1>Création d'une catégorie</h1>
+            {{ form_start(formCate) }}
+            {{ form_widget(formCate) }}
+            {{ form_end(formCate) }}
+        </div>
     </div>
 {% endblock %}
 
