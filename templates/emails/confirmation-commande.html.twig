@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de commande</title>
+</head>
+{# $user, $produits, $total #}
+<body>
+{# ceci est le template d'un mail de confirmation de commade fait moi le mail er rajoute du style #}
+<h1>Confirmation de commande</h1>
+<p>Bonjour {{ user.prenom }} {{ user.nom }} !</p>
+<p>Votre commande de {{ commande.total }} € a bien été prise en compte.</p>
+<p>Voici le récapitulatif de votre commande :</p>
+<ul>
+    {% for ligne in commande.ligneCommandes %}
+        <li>
+            <p>Produit : {{ ligne.produit.libelle }}</p>
+            <img src="{{ asset(ligne.produit.visuel) }}" alt="visuel produit"
+                 style="width: 100px">
+            <p>Quantité : {{ ligne.quantite }}</p>
+            <p>Prix : {{ ligne.prix }} €</p>
+        </li>
+    {% endfor %}
+</ul>
+<p>A bientôt sur notre site !</p>

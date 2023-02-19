@@ -123,7 +123,7 @@ class PanierService
     //o Le contenu du panier devra être supprimé à l’issue de ce traitement.
     //o Cette méthode renverra en résultat l’entité Commande qui aura été créée.
 
-    public function panierToCommande($user, EntityManagerInterface $em) : void{
+    public function panierToCommande($user, EntityManagerInterface $em) : Commande{
 
         $commande = new Commande();
         $total = 0;
@@ -150,5 +150,6 @@ class PanierService
         $em->persist($commande);
         $em->flush();
         $this->vider();
+        return $commande;
     }
 }
