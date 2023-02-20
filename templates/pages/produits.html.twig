@@ -10,7 +10,7 @@
                 <div class="card m-2" style="width: 16rem; height: 28rem;">
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ produit.libelle }}</h5>
-                        <img class="card-img" src="{{ asset(produit.visuel) }}">
+                        <img class="card-img" style="height: 200px; width: 200px;" src="{{ asset(produit.visuel) }}">
                         <p class="card-text">{{ produit.prix }} €</p>
                         <p class="card-text" style="height: 30px">{{ produit.texte }}</p>
                         <a class="btn btn-primary" href="{{ path('ajouterProduit', {'idProduit': produit.id}) }}"><i

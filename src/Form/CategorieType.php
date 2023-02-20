@@ -7,6 +7,7 @@ use App\Entity\User;
 use PharIo\Manifest\Email;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,11 +28,9 @@ class CategorieType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('visuel', TextType::class, [
+            ->add('visuel', FileType::class, [
+                'label' => 'Choose file to upload',
                 'required' => true,
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]

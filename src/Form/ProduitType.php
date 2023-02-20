@@ -9,6 +9,7 @@ use PharIo\Manifest\Email;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -30,11 +31,9 @@ class ProduitType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('visuel', TextType::class, [
+            ->add('visuel', FileType::class, [
+                'label' => 'Choose file to upload',
                 'required' => true,
-                'label_attr' => [
-                    'class' => 'form-label'
-                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]

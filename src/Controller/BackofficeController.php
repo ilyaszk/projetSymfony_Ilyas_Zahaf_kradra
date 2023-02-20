@@ -39,6 +39,14 @@ class BackofficeController extends AbstractController
         $formCate->handleRequest($request);
 
         if ($formCate->isSubmitted() && $formCate->isValid()) {
+            $file = $formCate->get('visuel')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            $file->move(
+                $this->getParameter('upload_directory_categories'),
+                $fileName
+            );
+            $formCate->getData()->setVisuel('images/categories/'.$fileName);
             $em->persist($formCate->getData());
             $em->flush();
         }
@@ -54,6 +62,14 @@ class BackofficeController extends AbstractController
         $formProd->handleRequest($request);
 
         if ($formProd->isSubmitted() && $formProd->isValid()) {
+            $file = $formProd->get('visuel')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('upload_directory_produits'),
+                    $fileName
+                );
+            $formProd->getData()->setVisuel('images/produits/'.$fileName);
             $em->persist($formProd->getData());
             $em->flush();
         }

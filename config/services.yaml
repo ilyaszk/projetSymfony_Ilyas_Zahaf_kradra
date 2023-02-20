@@ -6,6 +6,8 @@
 parameters:
     # locales autorisées dans l'application
     app.supported_locales: 'fr|en'
+    upload_directory_produits: '%kernel.project_dir%/public/images/produits'
+    upload_directory_categories: '%kernel.project_dir%/public/images/categories'
 services:
     # default configuration for services in *this* file
     _defaults:
