@@ -59,6 +59,7 @@ class PanierController extends AbstractController
     {
 
         $commande = $panierService->panierToCommande($this->getUser(), $entityManager);
+        $this->addFlash('success', 'Commande passée avec succès');
         $this->envoyerMail($this->getUser(), $commande);
         return $this->redirectToRoute('panier');
     }
@@ -75,23 +76,27 @@ class PanierController extends AbstractController
 
         $mail = new PHPMailer(true);
 
-        // Paramètres du serveur SMTP
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'ilyassymfony@gmail.com'; // Votre adresse e-mail Gmail
-        $mail->Password = 'mcwedcdmhaifmrom'; // Votre mot de passe Gmail
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-        // Destinataire
-        $mail->setFrom('ilyassymfony@gmail.com', 'projet Symfony Commande');
-        $mail->addAddress($user->getEmail(), $user->getNom() . ' ' . $user->getPrenom());
+        try {
+            // Paramètres du serveur SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ilyassymfony@gmail.com'; // Votre adresse e-mail Gmail
+            $mail->Password = 'mcwedcdmhaifmrom'; // Votre mot de passe Gmail
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            // Destinataire
+            $mail->setFrom('ilyassymfony@gmail.com', 'projet Symfony Commande');
+            $mail->addAddress($user->getEmail(), $user->getNom() . ' ' . $user->getPrenom());
 
-        // Contenu du message
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $body;
-
-        $mail->send();
+            // Contenu du message
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->send();
+            $this->addFlash('success', 'Mail de confirmation de commande envoyé avec succès');
+        } catch (Exception $e) {
+            $this->addFlash('danger', 'Une erreur est survenue lors de l\'envoi du mail de confirmation de commande');
+        }
     }
 }

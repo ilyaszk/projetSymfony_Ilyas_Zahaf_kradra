@@ -49,6 +49,8 @@ class BackofficeController extends AbstractController
             $formCate->getData()->setVisuel('images/categories/'.$fileName);
             $em->persist($formCate->getData());
             $em->flush();
+            $this->addFlash('success', 'Catégorie ajoutée avec succès');
+            return $this->redirectToRoute('createCategory');
         }
 
         return $this->render('pages/creationCategorie.html.twig', [
@@ -72,6 +74,7 @@ class BackofficeController extends AbstractController
             $formProd->getData()->setVisuel('images/produits/'.$fileName);
             $em->persist($formProd->getData());
             $em->flush();
+            $this->addFlash('success', 'Produit ajouté avec succès');
         }
 
         return $this->render('pages/creationProduit.html.twig', [

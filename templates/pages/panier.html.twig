@@ -5,6 +5,11 @@
 {% block body %}
     <div class="d-flex justify-content-between w-100">
         <div class="card mx-3" style="width: 70%;">
+            {% for label, messages in app.flashes %}
+                <div class="alert alert-{{ label }}">
+                    {{ messages[0] }}
+                </div>
+            {% endfor %}
             <div class="row">
                 <div class="col-12">
                     <h1 class="text-center">Votre panier : {{ render(path('nbProduits')) }} produit(s)</h1>
